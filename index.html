@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#F57C00"><link rel="apple-touch-icon" href="icon-192.png">
+<title>กองทุนสวัสดิการออมทรัพย์ นาสวรรค์คำนาดี</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--or:#F57C00;--od:#E65100;--ol:#FFF3E0;--gr:#2E7D32;--gd:#1B5E20;--gl:#E8F5E9;--ink:#263238}
+*{-webkit-tap-highlight-color:transparent}
+body{font-family:'Sarabun',sans-serif;background:#fff;color:var(--ink);font-size:16px}
+.topbar{background:linear-gradient(90deg,var(--od),var(--or));color:#fff;padding:.7rem 0}
+.topbar .bn{font-size:1.4rem;font-weight:700;line-height:1.2}.topbar small{font-size:.85rem;opacity:.92}.topbar .u{font-size:.9rem;background:#ffffff2e;border-radius:20px;padding:.25rem .85rem}
+.menubar{background:var(--gr);position:sticky;top:0;z-index:1030;padding:.2rem 0;box-shadow:0 3px 8px #0002}
+.menubar .nav-link{color:#fff!important;font-weight:600;font-size:.95rem;padding:.55rem .8rem;border-radius:8px;margin:2px}
+.menubar .nav-link:hover{background:#ffffff2e}.menubar .nav-link.active{background:#fff;color:var(--gr)!important}
+.ft{border-top:4px solid;border-image:linear-gradient(90deg,var(--or),var(--gr)) 1;margin-top:2rem;padding:1rem;text-align:center;font-size:.85rem;color:#78909c}
+h3,.h3{font-size:1.75rem}h5{font-size:1.3rem;font-weight:700}h6{font-size:1.05rem;font-weight:700}
+label{font-size:.9rem;font-weight:600;color:#455a64;margin-bottom:.2rem}
+.form-control,.form-select{font-size:1rem;border-radius:10px;border:1.5px solid #dfe3e6;padding:.5rem .75rem}
+.form-control:focus,.form-select:focus{border-color:var(--or);box-shadow:0 0 0 .2rem #F57C0022}
+.btn{font-size:1rem;font-weight:600;border-radius:10px;padding:.5rem 1.1rem}.btn-sm{font-size:.85rem;padding:.3rem .7rem;border-radius:8px}
+.btn-or{background:var(--or);color:#fff;border:0}.btn-or:hover{background:var(--od);color:#fff}
+.btn-gr{background:var(--gr);color:#fff;border:0}.btn-gr:hover{background:var(--gd);color:#fff}
+.card{border:1px solid #f1e7dc;border-radius:14px;box-shadow:0 2px 10px #0000000d;background:#fff}
+.hero{background:linear-gradient(120deg,var(--od) 0%,var(--or) 45%,var(--gr) 100%);color:#fff;border-radius:18px;padding:1.6rem 1.8rem}
+.hero h3{font-weight:700;font-size:1.7rem}
+.stat{border:1px solid #eee;border-left:6px solid var(--or);border-radius:14px;box-shadow:0 2px 10px #0000000d;transition:.2s}
+.stat:hover{transform:translateY(-3px)}.stat.g{border-left-color:var(--gr)}
+.stat .v{font-size:1.65rem;font-weight:700}.stat .small{font-size:.85rem}.stat i{font-size:2rem;opacity:.85}
+table.dataTable{font-size:.95rem}table.dataTable thead th{background:var(--gr);color:#fff;border:0;font-weight:600}
+table.dataTable tbody tr:nth-child(even){background:#fafafa}
+.modal-header{background:linear-gradient(90deg,var(--or),var(--gr));color:#fff}.modal-title{font-size:1.2rem;font-weight:700}.modal-header .btn-close{filter:invert(1)}
+.rule li{margin-bottom:.3rem}.ok{color:var(--gr)}.no{color:#c62828}
+/* ---- login slide ---- */
+body.login .topbar,body.login .menubar,body.login .ft{display:none}
+body.login main{max-width:none!important;padding:0!important;margin:0}
+.lg{display:flex;min-height:100vh;background:#fff}
+.lg-s{flex:1.15;position:relative;overflow:hidden;color:#fff;background:linear-gradient(135deg,var(--od),var(--or) 45%,var(--gr) 100%)}
+.lg-s::before,.lg-s::after{content:"";position:absolute;border-radius:50%;background:#ffffff14}
+.lg-s::before{width:420px;height:420px;top:-150px;right:-120px}.lg-s::after{width:300px;height:300px;bottom:-110px;left:-90px}
+.lg-t{display:flex;height:100%;min-height:100vh;transition:transform .7s cubic-bezier(.65,0,.35,1)}
+.sl{min-width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 3.5rem;position:relative;z-index:1}
+.sl .ic{width:140px;height:140px;border-radius:50%;background:#ffffff26;display:flex;align-items:center;justify-content:center;font-size:4.2rem;margin-bottom:1.6rem;box-shadow:0 0 0 14px #ffffff14}
+.sl h2{font-size:2rem;font-weight:700;margin-bottom:.6rem}.sl p{font-size:1.1rem;opacity:.95;max-width:430px;margin:0}
+.lg-b{position:absolute;top:22px;left:28px;font-weight:700;font-size:1.1rem;z-index:3}
+.dots{position:absolute;bottom:28px;left:0;right:0;display:flex;justify-content:center;gap:10px;z-index:3}
+.dots b{width:10px;height:10px;border-radius:10px;background:#ffffff80;cursor:pointer;transition:.3s}.dots b.on{width:34px;background:#fff}
+.arr{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:#ffffff30;color:#fff;font-size:1.2rem;z-index:3}.arr.l{left:16px}.arr.r{right:16px}
+.lg-f{flex:.85;display:flex;align-items:center;justify-content:center;padding:2rem;background:#fff;position:relative;z-index:10}
+.lg-f .box{width:100%;max-width:400px}
+.lgo{width:66px;height:66px;border-radius:18px;background:linear-gradient(135deg,var(--or),var(--gr));color:#fff;display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1rem}
+.lg-f h1{font-size:1.9rem;font-weight:700;margin:0 0 .2rem}.lg-f .sub{font-size:.95rem;color:#78909c;margin-bottom:1.5rem}
+.ig{display:flex;align-items:center;border:2px solid #e0e3e5;border-radius:12px;padding:0 .8rem;margin-bottom:1rem;background:#fff}
+.ig:focus-within{border-color:var(--or);box-shadow:0 0 0 4px #F57C0022}.ig i{color:var(--gr);font-size:1.15rem}
+.ig input{flex:1;width:100%;min-width:0;border:0;outline:0;padding:.8rem .6rem;font-size:1.05rem;background:transparent;font-family:inherit;color:var(--ink);pointer-events:auto;user-select:text;-webkit-user-select:text}
+.eye{border:0;background:none;color:#78909c;font-size:1.2rem;padding:0 .2rem}
+.go{width:100%;border:0;border-radius:12px;padding:.85rem;font-size:1.15rem;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--or),var(--gr));box-shadow:0 6px 16px #F57C0033}
+.go:disabled{opacity:.7}.lg-f .hint{font-size:.85rem;color:#90a4ae;text-align:center;margin-top:1.2rem}
+@media(max-width:768px){.lg{flex-direction:column}.lg-s{flex:none;height:290px}.lg-t{min-height:0;height:100%}.sl{padding:1rem 2.8rem}.sl .ic{width:80px;height:80px;font-size:2.3rem;margin-bottom:.7rem;box-shadow:0 0 0 8px #ffffff14}.sl h2{font-size:1.3rem}.sl p{font-size:.92rem}.dots{bottom:14px}.lg-b{top:12px;left:16px;font-size:.95rem}.arr{display:none}.lg-f{padding:1.5rem 1.2rem}}
+</style></head><body>
+<header class="topbar"><div class="container-xxl d-flex justify-content-between align-items-center flex-wrap gap-2">
+  <div class="d-flex align-items-center gap-2"><i class="bi bi-piggy-bank-fill" style="font-size:2rem"></i><div><div class="bn">กองทุนสวัสดิการออมทรัพย์</div><small>กลุ่มโรงเรียนนาสวรรค์คำนาดี · ข้อบังคับ พ.ศ. 2569</small></div></div>
+  <div class="d-flex gap-2 flex-wrap"><span class="u" id="sy" style="cursor:pointer" onclick="go('sync')"></span><span class="u"><i class="bi bi-person-circle"></i> <span id="usr"></span></span></div></div></header>
+<nav class="navbar navbar-expand-lg navbar-dark menubar"><div class="container-xxl">
+  <span class="navbar-brand d-lg-none fs-6 fw-bold">เมนู</span>
+  <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nv"><span class="navbar-toggler-icon"></span></button>
+  <div class="collapse navbar-collapse" id="nv"><ul class="navbar-nav" id="menu"></ul></div></div></nav>
+<main class="container-xxl py-4" id="app"></main>
+<footer class="ft">© กองทุนสวัสดิการออมทรัพย์กลุ่มโรงเรียนนาสวรรค์คำนาดี</footer>
+
+<div class="modal fade" id="mdl"><div class="modal-dialog modal-lg modal-dialog-scrollable"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title" id="mt"></h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body" id="mb"></div>
+  <div class="modal-footer"><button class="btn btn-light" data-bs-dismiss="modal">ยกเลิก</button><button class="btn btn-or" id="ms"><i class="bi bi-save"></i> บันทึก</button></div>
+</div></div></div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+const SCHOOLS=['โรงเรียนบ้านนาสวรรค์','โรงเรียนบ้านโคกสวาง','โรงเรียนบ้านหนองตอ','โรงเรียนตชด.บ้านนาแวง','โรงเรียนเลิดสิน','โรงเรียนบ้านนาเจริญวิทยา','โรงเรียนบ้านดอนแก้วโนนอินทร์แปลง','โรงเรียนบ้านชุมภูทอง'];
+const TYPES=['สามัญ','สมทบ ก','สมทบ ข','สมทบ ค'];
+const MENU=[['home','house-fill','หน้าหลัก'],['members','people-fill','สมาชิก/หุ้น'],['loans','cash-coin','เงินกู้'],['monthly','calendar-check','ปิดยอดรายเดือน'],['welfare','heart-fill','สวัสดิการ'],['div','pie-chart-fill','ปันผล/เฉลี่ยคืน'],['books','calculator-fill','งบดุล/ตรวจบัญชี'],['expenses','receipt','ค่าใช้จ่าย'],['exits','person-dash-fill','ย้าย/ลาออก'],['docs','folder-fill','เอกสาร'],['sync','arrow-repeat','ซิงก์/ออฟไลน์'],['import','file-earmark-arrow-up-fill','นำเข้าข้อมูล','admin'],['settings','gear-fill','ตั้งค่า','admin'],['users','shield-lock-fill','ผู้ใช้']];
+const SS={get(k){try{return localStorage.getItem('nsk_'+k)}catch(e){return window['_'+k]||null}},set(k,v){try{localStorage.setItem('nsk_'+k,v)}catch(e){window['_'+k]=v}},clear(){['t','u'].forEach(k=>{try{localStorage.removeItem('nsk_'+k)}catch(e){}});window._t=window._u=null}};
+let TOKEN=SS.get('t')||'',USER=null;try{USER=JSON.parse(SS.get('u')||'null')}catch(e){}
+const B=n=>(+n||0).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
+const PCSS="body{font-family:'Sarabun','TH Sarabun New',Tahoma,sans-serif;font-size:15px;color:#222}.pg{padding:8px 14px}table{border-collapse:collapse;width:100%;margin:6px 0}td,th{border:1px solid #777;padding:4px 7px;vertical-align:top}th{background:#E8F5E9}.sg td{border:0;text-align:center;padding-top:28px}.c{text-align:center}.o{color:#E65100;font-weight:bold;font-size:19px}.g{color:#2E7D32;font-weight:bold;font-size:20px}.n{text-align:right}.b td{font-weight:bold;background:#FFF3E0}";
+function printHtml(body){const w=window.open('','_blank');w.document.write('<html><head><meta charset="utf-8"><style>'+PCSS+'</style></head><body>'+body+'</body></html>');w.document.close();setTimeout(()=>w.print(),600)}
+function out(title,html,cat){Swal.fire({title,icon:'success',showDenyButton:true,showCancelButton:true,confirmButtonText:'🖨 พิมพ์',denyButtonText:'☁ บันทึก PDF ลง Drive',cancelButtonText:'ปิด',confirmButtonColor:'#F57C00',denyButtonColor:'#2E7D32'}).then(async r=>{
+  if(r.isConfirmed)printHtml(html);else if(r.isDenied){const d=await run('saveReport',{title,html,cat},'บันทึกลง Drive แล้ว');if(d)window.open(d.pdf,'_blank')}})}
+const HEAD=t=>`<div class="c o">กองทุนสวัสดิการออมทรัพย์กลุ่มโรงเรียนนาสวรรค์คำนาดี</div><div class="c g">${t}</div>`;
+const SIGN=a=>`<table class="sg"><tr>${a.map(x=>`<td>(ลงชื่อ) ……………………………<br>(${x[1]||'……………………………'})<br>${x[0]}</td>`).join('')}</tr></table>`;
+const today=()=>new Date().toISOString().slice(0,10);
+const EXCAT=['พัฒนากลุ่ม','ค่าตอบแทน','ค่าใช้จ่ายดำเนินงาน','จัดสรรสนับสนุน','สมทบช่วยเหลือ'];
+const EXITR=['ย้ายออกนอกกลุ่ม','เกษียณอายุราชการ','เสียชีวิต','ลาออก','สิ้นสุดสัญญาจ้าง'];
+let DB={Members:[],Loans:[]},dt=null,onSave=null;
+const mdl=new bootstrap.Modal('#mdl');
+
+/* ================= ออฟไลน์ + ซิงก์ ================= */
+const isGAS=()=>!!(window.google&&google.script&&google.script.run);
+const API=()=>{try{return localStorage.getItem('nsk_api')||''}catch(e){return ''}};
+let Q=[],FAILED=[],FLP=Promise.resolve();const RES=new Map(),MEM={};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const ck=(a,p)=>'c:'+a+'|'+JSON.stringify(p===undefined?null:p);
+const sumk=(a,k)=>a.reduce((x,r)=>x+(+r[k]||0),0);
+const toast=t=>Swal.fire({toast:true,position:'top',icon:'info',title:t,timer:2800,showConfirmButton:false});
+let _db;const idb=()=>_db||(_db=new Promise((res,rej)=>{const q=indexedDB.open('nsk',1);q.onupgradeneeded=()=>q.result.createObjectStore('kv');q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)}));
+async function kvGet(k){try{const d=await idb();return await new Promise(r=>{const t=d.transaction('kv').objectStore('kv').get(k);t.onsuccess=()=>r(t.result);t.onerror=()=>r(undefined)})}catch(e){try{return JSON.parse(localStorage.getItem('nsk_kv_'+k))}catch(_){return MEM[k]}}}
+async function kvSet(k,v){try{const d=await idb();await new Promise((res,rej)=>{const t=d.transaction('kv','readwrite');t.objectStore('kv').put(v,k);t.oncomplete=res;t.onerror=rej})}catch(e){try{localStorage.setItem('nsk_kv_'+k,JSON.stringify(v))}catch(_){MEM[k]=v}}}
+async function kvClear(){try{const d=await idb();await new Promise(r=>{const t=d.transaction('kv','readwrite');t.objectStore('kv').clear();t.oncomplete=r})}catch(e){}try{Object.keys(localStorage).filter(k=>k.indexOf('nsk_kv_')==0).forEach(k=>localStorage.removeItem(k))}catch(e){}}
+const lget=async s=>(await kvGet(ck('list',s)))||[],lset=(s,v)=>kvSet(ck('list',s),v);
+
+function transport(a,p,t){
+  p=p===undefined?null:p;
+  if(isGAS())return new Promise(r=>google.script.run.withSuccessHandler(r).withFailureHandler(e=>r({ok:false,error:e.message,net:true})).api(a,p,t));
+  const u=API();if(!u)return Promise.resolve({ok:false,error:'ยังไม่ได้ตั้งค่า URL ของ Web App (เมนูซิงก์/ออฟไลน์)',net:true});
+  return fetch(u,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:a,p,token:t}),redirect:'follow'}).then(r=>r.json()).catch(()=>({ok:false,error:'เชื่อมต่อเซิร์ฟเวอร์ไม่ได้',net:true}))}
+
+const QOK=['save','remove','createLoan','welfare'],RD=['list','dashboard','balance','dividend','formList','getSettings','listUsers'];
+const WELF={'บาดเจ็บ':500,'เสียชีวิต':1000,'เกษียณอายุราชการ':1000,'ย้ายออกนอกกลุ่ม':500};
+async function call(a,p){
+  if(a==='login')return transport(a,p,'');
+  if(QOK.includes(a))return enqueue(a,p);
+  if(RD.includes(a)){const k=ck(a,p);
+    if(navigator.onLine){if(Q.length)await flush();const r=await transport(a,p,TOKEN);if(r.ok){kvSet(k,r.data);return r}if(!r.net)return r}
+    if(a==='dashboard')return{ok:true,data:await localDash(),offline:true};
+    const c=await kvGet(k);return c!==undefined&&c!==null?{ok:true,data:c,offline:true}:{ok:false,error:'ออฟไลน์ และยังไม่มีข้อมูลสำรองของรายการนี้ในเครื่อง (ต้องเปิดครั้งแรกตอนมีอินเทอร์เน็ต)'}}
+  if(!navigator.onLine)return{ok:false,error:'ฟังก์ชันนี้ต้องใช้อินเทอร์เน็ต (ปิดยอดเดือน นำเข้า สร้างเอกสาร Drive ฯลฯ)'};
+  return transport(a,p,TOKEN)}
+async function localDash(){const M=(await lget('Members')).filter(m=>m.status==='ใช้งาน'),L=(await lget('Loans')).filter(l=>l.status==='ผ่อนอยู่'),sc={};M.forEach(m=>sc[m.school]=(sc[m.school]||0)+1);
+  return{members:M.length,shares:sumk(M,'shares'),loans:L.length,debt:sumk(L,'balance'),interest:sumk(await lget('Monthly'),'interest'),byYm:{},schools:sc}}
+async function applyLocal(op){const{a,p}=op;
+  if(a==='save'){const L=await lget(p.sheet),o=p.obj,i=L.findIndex(x=>String(x.id)==String(o.id));if(i>=0)L[i]={...L[i],...o};else L.push({...o});await lset(p.sheet,L);return{}}
+  if(a==='remove'){await lset(p.sheet,(await lget(p.sheet)).filter(x=>String(x.id)!=String(p.id)));return{}}
+  if(a==='createLoan'){const L=await lget('Loans'),amt=+p.amount,pe=p.kind==='พิเศษ'?10:Math.min(+p.periods||40,40);
+    const prior=L.filter(l=>String(l.memberId)==String(p.memberId)&&l.kind==p.kind&&l.status=='ผ่อนอยู่'),po=sumk(prior,'balance');prior.forEach(l=>l.status='ปิด-กู้ใหม่');
+    L.push({id:op.tid,memberId:p.memberId,kind:p.kind,date:p.date,amount:amt,ppp:Math.ceil(amt/pe),periods:pe,paid:0,balance:amt,g1:p.g1||'',g2:p.g2||'',status:'ผ่อนอยู่'});await lset('Loans',L);return{payoff:po,net:amt-po}}
+  if(a==='welfare'){const L=await lget('Welfare');L.push({id:op.tid,date:p.date,memberId:p.memberId,type:p.type,amount:WELF[p.type]||0});await lset('Welfare',L);return{}}}
+const sheetOf=o=>o.a=='createLoan'?'Loans':o.a=='welfare'?'Welfare':o.p.sheet;
+async function refresh(op){const r=await transport('list',sheetOf(op),TOKEN);if(r.ok)await lset(sheetOf(op),r.data)}
+async function enqueue(a,p){
+  if(a==='save'&&p.sheet==='Members'){const n=Math.floor(+p.obj.shares/50);if(n<120)return{ok:false,error:'ต้องถือหุ้นอย่างน้อย 120 หุ้น (6,000 บาท) ตามข้อ 10'};if(n>400&&!p.obj.over400)return{ok:false,error:'เกิน 400 หุ้น ต้องได้รับความเห็นชอบจากคณะกรรมการ (แบบ ข-2)'}}
+  const op={id:uid(),a,p:JSON.parse(JSON.stringify(p)),ts:Date.now(),u:USER&&USER.u};op.tid='c_'+uid();
+  if(a==='save'&&!op.p.obj.id)op.p.obj.id=op.tid;
+  const loc=await applyLocal(op);Q.push(op);await kvSet('q',Q);badge();
+  if(navigator.onLine){await flush();const x=RES.get(op.id);RES.delete(op.id);
+    if(x){if(!x.ok){FAILED=FAILED.filter(f=>f.id!=op.id);await kvSet('f',FAILED);badge();await refresh(op);return{ok:false,error:x.error}}
+      if(x.map||a==='createLoan')await refresh(op);return{ok:true,data:x.data}}}
+  return{ok:true,queued:true,data:{...(a==='save'?op.p.obj:{}),...loc,queued:true}}}
+function flush(){return(FLP=FLP.then(doFlush,doFlush))}
+async function doFlush(){
+  if(!navigator.onLine||!TOKEN||!Q.length)return;
+  const snap=Q.slice(),r=await transport('applyOps',{ops:snap},TOKEN);
+  if(!r.ok){if(r.error=='SESSION'&&await reauth())return doFlush();return}
+  const ids=new Set(snap.map(o=>o.id));Q=Q.filter(o=>!ids.has(o.id));
+  r.data.results.forEach((x,i)=>{RES.set(x.id,x);if(!x.ok)FAILED.push({...snap[i],error:x.error})});
+  const map=r.data.map||{};if(Object.keys(map).length){let s=JSON.stringify(Q);for(const t in map)s=s.split('"'+t+'"').join(JSON.stringify(map[t]));Q=JSON.parse(s)}
+  await kvSet('q',Q);await kvSet('f',FAILED);await kvSet('last',Date.now());badge()}
+async function syncNow(){const b=FAILED.length,had=Q.length;await flush();const n=FAILED.length-b;
+  if(n>0)Swal.fire({icon:'warning',title:'ซิงก์ไม่สำเร็จ '+n+' รายการ',text:'ดูรายละเอียดและแก้ไขที่เมนู "ซิงก์/ออฟไลน์"',confirmButtonColor:'#F57C00'});
+  else if(had&&!Q.length)toast('☁ อัปโหลดข้อมูลที่บันทึกในเครื่องแล้ว '+had+' รายการ')}
+async function prefetch(){if(!navigator.onLine||!TOKEN||Q.length)return;const ym=new Date().toISOString().slice(0,7);
+  const jobs=['Members','Loans','Monthly','Welfare','Expenses','Exits','Audit','Docs'].map(s=>['list',s]).concat([['dashboard'],['getSettings'],['formList'],['balance',{ym}]]);
+  if(USER&&USER.role=='admin')jobs.push(['listUsers']);
+  for(const[a,p]of jobs){const r=await transport(a,p,TOKEN);if(r.ok)await kvSet(ck(a,p),r.data);else if(r.error=='SESSION')break}
+  await kvSet('pre',Date.now());badge()}
+function badge(){const on=navigator.onLine;$('#sy').html(`<i class="bi bi-${on?'wifi':'wifi-off'}"></i> ${on?'ออนไลน์':'ออฟไลน์'}${Q.length?' · รอซิงก์ '+Q.length:''}${FAILED.length?' · ⚠ '+FAILED.length:''}`).css('background',on&&!FAILED.length?'#ffffff2e':on?'#8d6e00':'#c62828')}
+async function reauth(){const r=await Swal.fire({title:'เซสชันหมดอายุ',text:'เข้าสู่ระบบอีกครั้ง (ข้อมูลที่บันทึกในเครื่องยังอยู่ครบ)',html:'<input id="ru" class="swal2-input" placeholder="ชื่อผู้ใช้"><input id="rp" type="password" class="swal2-input" placeholder="รหัสผ่าน">',showCancelButton:true,confirmButtonText:'เข้าสู่ระบบ',cancelButtonText:'ยกเลิก',confirmButtonColor:'#F57C00',
+  preConfirm:async()=>{const x=await transport('login',{u:$('#ru').val(),p:$('#rp').val()},'');if(!x.ok){Swal.showValidationMessage(x.error);return false}return x.data}});
+  if(r.isConfirmed&&r.value){TOKEN=r.value.token;USER=r.value.user;SS.set('t',TOKEN);SS.set('u',JSON.stringify(USER));return true}return false}
+async function askApi(){const r=await Swal.fire({title:'ตั้งค่าเซิร์ฟเวอร์',html:'วาง URL ของ Apps Script Web App (ลงท้าย /exec)',input:'url',inputValue:API(),showCancelButton:true,confirmButtonText:'บันทึก',cancelButtonText:'ข้าม',confirmButtonColor:'#F57C00'});if(r.isConfirmed&&r.value)localStorage.setItem('nsk_api',r.value.trim())}
+async function logout(){const n=Q.length;
+  if(!(await Swal.fire({title:'ออกจากระบบ?',text:n?'ยังมี '+n+' รายการรอซิงก์ — จะเก็บไว้ในเครื่อง และอัปโหลดเมื่อเข้าสู่ระบบและมีอินเทอร์เน็ต':'',icon:'question',showCancelButton:true,confirmButtonText:'ออกจากระบบ',cancelButtonText:'ยกเลิก',confirmButtonColor:'#2E7D32'})).isConfirmed)return;
+  if(!n&&!FAILED.length)await kvClear();SS.clear();location.reload()}
+
+async function run(a,p,okMsg){
+  const slow=setTimeout(()=>Swal.showLoading(),400),r=await call(a,p);clearTimeout(slow);Swal.close();
+  if(!r.ok&&r.error=='SESSION'){if(await reauth())return run(a,p,okMsg);SS.clear();location.reload();return null}
+  if(!r.ok){Swal.fire({icon:'error',title:'ไม่สำเร็จ',text:r.error,confirmButtonColor:'#F57C00'});return null}
+  if(r.queued)toast('📥 บันทึกในเครื่องแล้ว — จะอัปโหลดเมื่อมีอินเทอร์เน็ต');else if(okMsg)Swal.fire({icon:'success',title:okMsg,timer:1400,showConfirmButton:false});
+  return r.data}
+async function load(){DB.Members=(await run('list','Members'))||[];DB.Loans=(await run('list','Loans'))||[]}
+const mname=id=>(DB.Members.find(m=>String(m.id)==String(id))||{}).name||'-';
+const mopts=(sel,f=m=>1)=>'<option value="">-- เลือก --</option>'+DB.Members.filter(f).map(m=>`<option value="${m.id}" ${m.id==sel?'selected':''}>${m.id} ${m.name}</option>`).join('');
+
+function table(id,cols,data,actions){
+  $('#'+id).html('<table class="table table-hover w-100" id="t"></table>');
+  if(dt)dt.destroy();
+  dt=$('#t').DataTable({data,columns:cols,language:{search:'ค้นหา:',lengthMenu:'แสดง _MENU_ แถว',info:'_START_–_END_ จาก _TOTAL_',paginate:{previous:'ก่อนหน้า',next:'ถัดไป'},zeroRecords:'ไม่พบข้อมูล',emptyTable:'ยังไม่มีข้อมูล'},responsive:true});
+  if(actions)$('#t tbody').on('click','button',function(){actions($(this).data('a'),$(this).data('id'))})}
+function modal(title,html,cb,btn='บันทึก'){$('#mt').text(title);$('#mb').html(html);$('#ms').html('<i class="bi bi-save"></i> '+btn);onSave=cb;mdl.show()}
+$('#ms').on('click',()=>onSave&&onSave());
+const val=id=>$('#'+id).val();
+
+/* ---------- หน้า ---------- */
+const PAGES={
+async home(){
+  $('#app').html('<div class="text-center py-5"><div class="spinner-border text-warning"></div></div>');
+  const d=await run('dashboard');if(!d)return;
+  const S=(i,t,v,c)=>`<div class="col-6 col-lg-3"><div class="card stat ${c}"><div class="card-body d-flex justify-content-between align-items-center"><div><div class="text-muted small">${t}</div><div class="v">${v}</div></div><i class="bi bi-${i} ${c?'text-success':'text-warning'}"></i></div></div></div>`;
+  $('#app').html(`<div class="hero mb-4"><h3 class="fw-bold mb-1">ยินดีต้อนรับ 👋 ระบบบริหารกองทุนสวัสดิการออมทรัพย์</h3>
+   <div>กลุ่มโรงเรียนนาสวรรค์คำนาดี · ข้อบังคับ พ.ศ. 2569 (บังคับใช้ 1 ต.ค. 2569)</div>
+   <div class="mt-3 d-flex flex-wrap gap-2"><button class="btn btn-light" onclick="go('members')"><i class="bi bi-person-plus"></i> เพิ่มสมาชิก</button><button class="btn btn-light" onclick="go('loans')"><i class="bi bi-cash-coin"></i> บันทึกเงินกู้</button><button class="btn btn-outline-light" onclick="go('monthly')"><i class="bi bi-calendar-check"></i> ปิดยอดเดือน</button></div></div>
+   <div class="row g-3 mb-4">${S('people-fill','สมาชิกทั้งหมด (คน)',d.members,'')}${S('piggy-bank-fill','ทุนเรือนหุ้น (บาท)',B(d.shares),'g')}${S('cash-stack','ลูกหนี้ ('+d.loans+' สัญญา)',B(d.debt),'')}${S('graph-up-arrow','เงินบำรุงสะสม (บาท)',B(d.interest),'g')}</div>
+   <div class="row g-3"><div class="col-lg-7"><div class="card h-100"><div class="card-body"><h6 class="fw-bold text-success"><i class="bi bi-building"></i> สมาชิกแยกตามโรงเรียน</h6>
+   ${Object.entries(d.schools).map(([k,v])=>`<div class="mb-2"><div class="d-flex justify-content-between small"><span>${k}</span><b>${v}</b></div><div class="progress" style="height:10px"><div class="progress-bar" style="width:${v/d.members*100}%;background:linear-gradient(90deg,#F57C00,#43A047)"></div></div></div>`).join('')||'<div class="text-muted">ยังไม่มีข้อมูล</div>'}</div></div></div>
+   <div class="col-lg-5"><div class="card h-100"><div class="card-body"><h6 class="fw-bold text-warning"><i class="bi bi-journal-text"></i> หลักเกณฑ์สำคัญ</h6><ul class="rule small ps-3">
+   <li>หุ้นละ 50 บาท ถือ 120–400 หุ้น (ข้อ 10)</li><li>กู้ปกติ ≤ 5 เท่าของหุ้น ไม่เกิน 60,000 บาท · 40 งวด</li><li>กู้พิเศษ ≤ 10,000 บาท · 10 งวด · ค้ำ 1 คน</li><li>เงินบำรุง 0.2%/เดือน ลดต้นลดดอก</li><li>ผู้ค้ำ 2 คน ค้ำได้ไม่เกิน 2 สัญญา</li><li>จัดสรรกำไร: ปันผล 40 · เฉลี่ยคืน 10 · กองทุน 50</li></ul></div></div></div></div>`)},
+
+async members(){
+  await load();
+  $('#app').html(`<div class="card"><div class="card-body"><div class="d-flex justify-content-between mb-3"><h5 class="fw-bold text-success"><i class="bi bi-people-fill"></i> ทะเบียนสมาชิกและทุนเรือนหุ้น</h5><button class="btn btn-or" id="add"><i class="bi bi-plus-lg"></i> เพิ่มสมาชิก</button></div><div id="tb"></div></div></div>`);
+  const draw=()=>table('tb',[{title:'เลขที่',data:'id'},{title:'ชื่อ-สกุล',data:'name'},{title:'โรงเรียน',data:'school'},{title:'ประเภท',data:'type'},{title:'ยอดหุ้น (บาท)',data:'shares',render:B,className:'text-end'},{title:'หุ้น/เดือน',data:'monthly',render:B,className:'text-end'},{title:'สถานะ',data:'status',render:s=>`<span class="badge ${s=='ใช้งาน'?'bg-success':'bg-secondary'}">${s}</span>`},{title:'',data:'id',orderable:false,render:i=>`<button class="btn btn-sm btn-outline-warning" data-a="e" data-id="${i}"><i class="bi bi-pencil"></i></button> <button class="btn btn-sm btn-outline-danger" data-a="d" data-id="${i}"><i class="bi bi-trash"></i></button>`}],DB.Members,async(a,id)=>{
+    const m=DB.Members.find(x=>x.id==id);
+    if(a=='e')form(m);else if(await ask('ลบสมาชิก '+m.name+'?')){if(await run('remove',{sheet:'Members',id},'ลบแล้ว')){await load();draw()}}});
+  const form=(m={})=>modal(m.id?'แก้ไขสมาชิก':'เพิ่มสมาชิก',`<div class="row g-3">
+    <div class="col-md-6"><label>ชื่อ-สกุล</label><input id="n" class="form-control" value="${m.name||''}"></div>
+    <div class="col-md-6"><label>ตำแหน่ง</label><input id="p" class="form-control" value="${m.position||''}"></div>
+    <div class="col-md-6"><label>โรงเรียน</label><select id="s" class="form-select">${SCHOOLS.map(x=>`<option ${x==m.school?'selected':''}>${x}</option>`)}</select></div>
+    <div class="col-md-6"><label>ประเภทสมาชิก (ข้อ 6)</label><select id="t" class="form-select">${TYPES.map(x=>`<option ${x==m.type?'selected':''}>${x}</option>`)}</select></div>
+    <div class="col-md-4"><label>วันที่สมัคร</label><input id="j" type="date" class="form-control" value="${m.joinDate||''}"></div>
+    <div class="col-md-4"><label>ยอดหุ้น (บาท, 6,000–20,000)</label><input id="h" type="number" step="50" class="form-control" value="${m.shares||6000}"></div>
+    <div class="col-md-4"><label>ส่งหุ้นรายเดือน (บาท)</label><input id="mo" type="number" step="50" class="form-control" value="${m.monthly||0}"></div>
+    <div class="col-md-6"><label>สถานะ</label><select id="st" class="form-select"><option>ใช้งาน</option><option ${m.status=='พ้นสภาพ'?'selected':''}>พ้นสภาพ</option></select></div>
+    <div class="col-md-6 d-flex align-items-end"><div class="form-check"><input id="o4" type="checkbox" class="form-check-input"><label class="form-check-label">คณะกรรมการเห็นชอบถือเกิน 400 หุ้น</label></div></div></div>`,async()=>{
+    const o={id:m.id||'',name:val('n'),position:val('p'),school:val('s'),type:val('t'),joinDate:val('j'),shares:+val('h'),monthly:+val('mo'),status:val('st'),over400:$('#o4').is(':checked')};
+    if(!o.name||!o.joinDate)return Swal.fire({icon:'warning',title:'กรอกชื่อและวันที่สมัคร'});
+    if(await run('save',{sheet:'Members',obj:o},'บันทึกแล้ว')){mdl.hide();await load();draw()}});
+  $('#add').on('click',()=>form());draw()},
+
+async loans(){
+  await load();
+  $('#app').html(`<div class="card"><div class="card-body"><div class="d-flex justify-content-between mb-3"><h5 class="fw-bold text-success"><i class="bi bi-cash-coin"></i> สัญญาเงินกู้</h5><button class="btn btn-or" id="add"><i class="bi bi-plus-lg"></i> ขอกู้เงิน</button></div><div id="tb"></div></div></div>`);
+  const draw=()=>table('tb',[{title:'สัญญา',data:'id'},{title:'ผู้กู้',data:'memberId',render:mname},{title:'แบบ',data:'kind'},{title:'วันที่',data:'date'},{title:'วงเงิน',data:'amount',render:B,className:'text-end'},{title:'ต้น/งวด',data:'ppp',render:B,className:'text-end'},{title:'งวดที่ชำระ',data:null,render:r=>r.paid+'/'+r.periods},{title:'คงเหลือ',data:'balance',render:B,className:'text-end'},{title:'ค้ำประกัน',data:null,render:r=>[r.g1,r.g2].filter(Boolean).map(mname).join(', ')||'-'},{title:'สถานะ',data:'status',render:s=>`<span class="badge ${s=='ผ่อนอยู่'?'bg-warning text-dark':'bg-success'}">${s}</span>`}],DB.Loans);
+  $('#add').on('click',()=>modal('คำร้องขอกู้เงิน (แบบ ค-1 / ค-2)',`<div class="row g-3">
+   <div class="col-md-6"><label>ผู้กู้</label><select id="m" class="form-select">${mopts('',x=>x.status=='ใช้งาน')}</select></div>
+   <div class="col-md-3"><label>แบบ</label><select id="k" class="form-select"><option>ปกติ</option><option>พิเศษ</option></select></div>
+   <div class="col-md-3"><label>วันที่</label><input id="d" type="date" class="form-control" value="${new Date().toISOString().slice(0,10)}"></div>
+   <div class="col-md-4"><label>จำนวนเงิน (บาท)</label><input id="a" type="number" class="form-control"></div>
+   <div class="col-md-4"><label>จำนวนงวด (≤40 / พิเศษ 10)</label><input id="pe" type="number" class="form-control" value="40"></div>
+   <div class="col-md-4 d-flex align-items-end"><div class="form-check"><input id="ex" type="checkbox" class="form-check-input"> <label>ผอ. ร่วมกู้/ยินยอม (สมทบ)</label></div></div>
+   <div class="col-md-6"><label>ผู้ค้ำประกัน 1</label><select id="g1" class="form-select">${mopts('',x=>x.type=='สามัญ')}</select></div>
+   <div class="col-md-6"><label>ผู้ค้ำประกัน 2 (กู้พิเศษไม่ต้อง)</label><select id="g2" class="form-select">${mopts('',x=>x.type=='สามัญ')}</select></div>
+   <div class="col-12"><button class="btn btn-gr btn-sm" id="ck"><i class="bi bi-clipboard-check"></i> ตรวจคุณสมบัติ (แบบ ค-5)</button><ul class="list-unstyled mt-2 mb-0" id="cr"></ul></div></div>`,async()=>{
+    const r=await run('createLoan',pl());if(r){Swal.fire({icon:'success',title:'บันทึกสัญญากู้แล้ว',html:'หักหนี้เดิม '+B(r.payoff)+' บาท<br><b>รับเงินสุทธิ '+B(r.net)+' บาท</b>'+(r.queued?'<br><small class="text-muted">บันทึกในเครื่อง — ระบบจะตรวจเงื่อนไขและหักหนี้เดิมจริงตอนซิงก์</small>':''),confirmButtonColor:'#F57C00'});mdl.hide();await load();draw()}}));
+  $('#mb').on('click','#ck',async()=>{const r=await run('checkLoan',pl());if(r)$('#cr').html(r.checks.map(c=>`<li class="${c.ok?'ok':'no'}"><i class="bi bi-${c.ok?'check-circle-fill':'x-circle-fill'}"></i> ${c.t}</li>`).join(''))});
+  const pl=()=>({memberId:val('m'),kind:val('k'),date:val('d'),amount:val('a'),periods:val('pe'),g1:val('g1'),g2:val('g2'),exec:$('#ex').is(':checked')});
+  draw()},
+
+async monthly(){
+  const ym=new Date().toISOString().slice(0,7);
+  $('#app').html(`<div class="card"><div class="card-body"><h5 class="fw-bold text-success"><i class="bi bi-calendar-check"></i> ปิดยอดประจำเดือน</h5>
+   <p class="text-muted">ระบบคำนวณต้นเงินกู้เท่ากันทุกงวด + เงินบำรุง 0.2% ของต้นคงเหลือ แล้วจึงหักค่าหุ้นรายเดือน (ข้อ 17)</p>
+   <div class="row g-2 align-items-end"><div class="col-auto"><label>เดือน</label><input id="ym" type="month" class="form-control" value="${ym}"></div><div class="col-auto"><button class="btn btn-or" id="go"><i class="bi bi-lightning-charge-fill"></i> ประมวลผลและปิดยอด</button></div></div>
+   <hr><div id="tb"></div></div></div>`);
+  const mo=(await run('list','Monthly'))||[];await load();
+  table('tb',[{title:'เดือน',data:'ym'},{title:'สมาชิก',data:'memberId',render:mname},{title:'เงินต้น',data:'principal',render:B,className:'text-end'},{title:'เงินบำรุง',data:'interest',render:B,className:'text-end'},{title:'ค่าหุ้น',data:'shares',render:B,className:'text-end'},{title:'รวมชำระ',data:'total',render:B,className:'text-end'}],mo);
+  $('#go').on('click',async()=>{if(!await ask('ปิดยอดเดือน '+val('ym')+' ? (ทำซ้ำเดือนเดิมไม่ได้)'))return;
+    const n=await run('closeMonth',{ym:val('ym')},'ปิดยอดสำเร็จ');if(n!==null)PAGES.monthly()})},
+
+async welfare(){
+  await load();const W={'บาดเจ็บ':500,'เสียชีวิต':1000,'เกษียณอายุราชการ':1000,'ย้ายออกนอกกลุ่ม':500};
+  $('#app').html(`<div class="card"><div class="card-body"><div class="d-flex justify-content-between mb-3"><h5 class="fw-bold text-success"><i class="bi bi-heart-fill"></i> เงินช่วยเหลือสวัสดิการ (ข้อ 38)</h5><button class="btn btn-or" id="add"><i class="bi bi-plus-lg"></i> บันทึกการจ่าย</button></div><div id="tb"></div></div></div>`);
+  const draw=async()=>table('tb',[{title:'วันที่',data:'date'},{title:'สมาชิก',data:'memberId',render:mname},{title:'ประเภท',data:'type'},{title:'จำนวนเงิน',data:'amount',render:B,className:'text-end'}],(await run('list','Welfare'))||[]);
+  $('#add').on('click',()=>modal('คำร้องขอรับสวัสดิการ (แบบ จ-1)',`<div class="row g-3"><div class="col-md-6"><label>สมาชิก</label><select id="m" class="form-select">${mopts()}</select></div>
+   <div class="col-md-3"><label>ประเภท</label><select id="t" class="form-select">${Object.entries(W).map(([k,v])=>`<option value="${k}">${k} (${v})</option>`)}</select></div>
+   <div class="col-md-3"><label>วันที่</label><input id="d" type="date" class="form-control" value="${new Date().toISOString().slice(0,10)}"></div>
+   <div class="col-12 small text-muted">เงื่อนไข: เป็นสมาชิกต่อเนื่อง ≥ 1 ปี และมีหุ้นสะสม ≥ 1,000 บาท</div></div>`,async()=>{
+    if(await run('welfare',{memberId:val('m'),type:val('t'),date:val('d')},'บันทึกแล้ว')){mdl.hide();draw()}}));draw()},
+
+async div(){
+  const y=new Date().getFullYear();
+  $('#app').html(`<div class="card"><div class="card-body"><h5 class="fw-bold text-success"><i class="bi bi-pie-chart-fill"></i> จัดสรรเงินบำรุงประจำปี (ข้อ 35 / แบบ จ-7)</h5>
+   <div class="row g-2 align-items-end mb-3"><div class="col-md-3"><label>กำไรสุทธิ/เงินบำรุงที่จัดสรรได้</label><input id="pf" type="number" class="form-control"></div>
+   <div class="col-md-3"><label>ตั้งแต่เดือน</label><input id="f" type="month" class="form-control" value="${y-1}-10"></div><div class="col-md-3"><label>ถึงเดือน</label><input id="to" type="month" class="form-control" value="${y}-09"></div>
+   <div class="col-md-3"><button class="btn btn-or w-100" id="go"><i class="bi bi-calculator"></i> คำนวณ</button></div></div><div id="sum"></div><div id="tb"></div></div></div>`);
+  $('#go').on('click',async()=>{const r=await run('dividend',{profit:val('pf'),from:val('f'),to:val('to')});if(!r)return;
+    $('#sum').html(`<div class="row g-2 mb-3"><div class="col-md-4"><div class="alert alert-warning mb-0">ปันผล 40%: <b>${B(r.divTotal)}</b></div></div><div class="col-md-4"><div class="alert alert-success mb-0">เฉลี่ยคืน 10%: <b>${B(r.rebTotal)}</b></div></div><div class="col-md-4"><div class="alert alert-light border mb-0">เข้ากองทุน 50%: <b>${B(r.fund)}</b></div></div></div>`);
+    table('tb',[{title:'เลขที่',data:'id'},{title:'ชื่อ-สกุล',data:'name'},{title:'หุ้น',data:'shares',render:B,className:'text-end'},{title:'ปันผล',data:'div',render:B,className:'text-end'},{title:'เฉลี่ยคืน',data:'reb',render:B,className:'text-end'},{title:'รวมรับ',data:'total',render:B,className:'text-end fw-bold'}],r.rows)})}
+
+,async docs(){
+  const [fl,ds]=await Promise.all([run('formList'),run('list','Docs')]);await load();if(!fl)return;
+  $('#app').html(`<div class="row g-3"><div class="col-lg-5"><div class="card"><div class="card-body"><h5 class="fw-bold text-success"><i class="bi bi-file-earmark-text-fill"></i> สร้างเอกสารลง Google Drive</h5>
+  <label>แบบฟอร์ม (28 ฉบับ)</label><select id="fc" class="form-select mb-2">${fl.map(f=>`<option value="${f.code}">${f.code} ${f.title}</option>`)}</select>
+  <label>สมาชิก (เติมข้อมูลอัตโนมัติ)</label><select id="fm" class="form-select mb-2">${mopts()}</select>
+  <label>สัญญากู้ (ถ้ามี)</label><select id="fl" class="form-select mb-3"><option value="">-- ไม่ระบุ --</option></select>
+  <button class="btn btn-or w-100" id="mk"><i class="bi bi-magic"></i> สร้าง Doc + PDF</button><button class="btn btn-outline-success w-100 mt-2" id="ap"><i class="bi bi-journals"></i> ภาคผนวกครบ 28 ฉบับ (PDF เล่มเดียว)</button><div id="res" class="mt-3"></div>
+  <hr><label class="fw-bold">อัปโหลดเอกสารแนบ (สำเนาบัตร มรณบัตร คำสั่ง ฯลฯ)</label>
+  <select id="uc" class="form-select my-2"><option>ทั่วไป</option><option>สมาชิก</option><option>เงินกู้</option><option>สวัสดิการ</option><option>การประชุม</option></select>
+  <input type="file" id="up" class="form-control"><button class="btn btn-gr w-100 mt-2" id="ub"><i class="bi bi-cloud-upload"></i> อัปโหลดลง Drive</button></div></div></div>
+  <div class="col-lg-7"><div class="card"><div class="card-body"><h6 class="fw-bold text-warning"><i class="bi bi-clock-history"></i> ประวัติเอกสาร</h6><div id="tb"></div></div></div></div></div>`);
+  const draw=d=>table('tb',[{title:'วันที่',data:'date'},{title:'แบบ',data:'code'},{title:'เอกสาร',data:'title'},{title:'โดย',data:'by'},{title:'ลิงก์',data:null,orderable:false,render:r=>`<a href="${r.url}" target="_blank" class="btn btn-sm btn-outline-warning">เปิด</a> ${r.pdf?`<a href="${r.pdf}" target="_blank" class="btn btn-sm btn-outline-success">PDF</a>`:''}`}],d.slice().reverse());draw(ds||[]);
+  $('#fm').on('change',()=>$('#fl').html('<option value="">-- ไม่ระบุ --</option>'+DB.Loans.filter(l=>l.memberId==val('fm')).map(l=>`<option value="${l.id}">${l.kind} ${B(l.amount)} (${l.id})</option>`)));
+  $('#mk').on('click',async()=>{const r=await run('makeDoc',{code:val('fc'),memberId:val('fm'),loanId:val('fl')},'สร้างเอกสารแล้ว');if(r){window.LASTHTML=r.html;$('#res').html(`<div class="alert alert-success"><a href="${r.url}" target="_blank">เปิด PDF</a> · <a href="#" onclick="event.preventDefault();printHtml(window.LASTHTML)">🖨 พิมพ์ทันที</a></div>`);draw((await run('list','Docs'))||[])}});
+  $('#ap').on('click',async()=>{const r=await run('makeAppendix',{},'สร้างแล้ว');if(r)window.open(r.pdf,'_blank')});
+  $('#ub').on('click',()=>{const f=$('#up')[0].files[0];if(!f)return Swal.fire({icon:'warning',title:'เลือกไฟล์ก่อน'});
+    const rd=new FileReader();rd.onload=async()=>{const r=await run('uploadFile',{name:f.name,mime:f.type||'application/octet-stream',data:rd.result.split(',')[1],cat:val('uc'),member:mname(val('fm'))},'อัปโหลดแล้ว');if(r)draw((await run('list','Docs'))||[])};rd.readAsDataURL(f)})},
+
+async import(){
+  $('#app').html(`<div class="card"><div class="card-body"><h5 class="fw-bold text-success"><i class="bi bi-file-earmark-arrow-up-fill"></i> นำเข้าข้อมูลจากไฟล์ ตค69.xlsx</h5>
+  <p class="text-muted">อ่านชีต “ตค69” → สมาชิก ยอดหุ้น หุ้นรายเดือน และสัญญากู้ปกติ/พิเศษ (ต้นคงเหลือ งวดที่ชำระ) ข้ามเลขที่ที่มีอยู่แล้ว<br>⚠ ไฟล์ไม่มีวันสมัคร/ผู้ค้ำ/ตำแหน่ง/ประเภทสมาชิก ระบบใส่ค่าเริ่มต้น (สามัญ, 31 ส.ค. 2565) ให้แก้ไขภายหลังในเมนูสมาชิก</p>
+  <input type="file" id="xf" accept=".xlsx" class="form-control mb-3"><div id="pv"></div></div></div>`);
+  $('#xf').on('change',e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{
+    const wb=XLSX.read(rd.result,{type:'array'}),ws=wb.Sheets['ตค69'];if(!ws)return Swal.fire({icon:'error',title:'ไม่พบชีต ตค69'});
+    const R=XLSX.utils.sheet_to_json(ws,{header:1,defval:''}),M=[],L=[],today=new Date().toISOString().slice(0,10);let school='';
+    R.forEach(r=>{if(typeof r[0]=='string'&&/^โรงเรียน/.test(r[0].trim())&&r[1]==='')school=r[0].trim();
+      if(typeof r[0]=='number'&&typeof r[1]=='number'&&r[2]){const id=r[1];M.push({id,name:String(r[2]).trim(),position:'',school,type:'สามัญ',joinDate:'2022-08-31',shares:+r[6]||0,monthly:+r[4]||0,status:'ใช้งาน'});
+        [[18,10,9,'ปกติ','N'],[19,15,14,'พิเศษ','S']].forEach(([b,pp,pd,k,c])=>{const bal=+r[b]||0,ppp=+r[pp]||0;if(bal>0&&ppp>0){const pa=+r[pd]||0;L.push({id:`IMP-${id}-${c}`,memberId:id,kind:k,date:today,amount:bal+pa*ppp,ppp,periods:pa+Math.ceil(bal/ppp),paid:pa,balance:bal,g1:'',g2:'',status:'ผ่อนอยู่'})}})}});
+    $('#pv').html(`<div class="alert alert-info">พบสมาชิก <b>${M.length}</b> คน · สัญญากู้ <b>${L.length}</b> สัญญา</div><button class="btn btn-or" id="go"><i class="bi bi-database-up"></i> ยืนยันนำเข้า</button>`);
+    $('#go').on('click',async()=>{const r=await run('importData',{members:M,loans:L});if(r)Swal.fire({icon:'success',title:'นำเข้าสำเร็จ',text:`สมาชิก ${r.members} · สัญญา ${r.loans} · ข้าม ${r.skipped}`})})};rd.readAsArrayBuffer(f)})},
+
+async users(){
+  const adm=USER.role=='admin',us=adm?(await run('listUsers'))||[]:[];
+  $('#app').html(`<div class="row g-3"><div class="col-md-5"><div class="card"><div class="card-body"><h5 class="fw-bold text-success"><i class="bi bi-key-fill"></i> เปลี่ยนรหัสผ่าน</h5>
+  <input id="po" type="password" class="form-control mb-2" placeholder="รหัสเดิม"><input id="pn" type="password" class="form-control mb-2" placeholder="รหัสใหม่ (≥ 6 ตัว)"><button class="btn btn-or" id="cp">เปลี่ยนรหัสผ่าน</button></div></div></div>
+  ${adm?`<div class="col-md-7"><div class="card"><div class="card-body"><h5 class="fw-bold text-success"><i class="bi bi-person-gear"></i> ผู้ใช้ระบบ</h5><div class="row g-2 mb-3">
+  <div class="col-4"><input id="nu" class="form-control" placeholder="username"></div><div class="col-4"><input id="np" type="password" class="form-control" placeholder="รหัสผ่าน"></div>
+  <div class="col-4"><input id="nn" class="form-control" placeholder="ชื่อแสดง"></div><div class="col-6"><select id="nr" class="form-select"><option value="staff">เจ้าหน้าที่ (บันทึกได้)</option><option value="viewer">ผู้ชม (ดูอย่างเดียว)</option><option value="admin">ผู้ดูแล</option></select></div>
+  <div class="col-6"><button class="btn btn-gr w-100" id="au">เพิ่มผู้ใช้</button></div></div>${us.map(u=>`<div class="d-flex justify-content-between border-bottom py-1"><span>${u.id} · ${u.name}</span><span class="badge bg-warning text-dark">${u.role}</span></div>`).join('')}</div></div></div>`:''}</div>`);
+  $('#cp').on('click',async()=>{if(await run('changePassword',{old:val('po'),new:val('pn')},'เปลี่ยนรหัสแล้ว'))$('#po,#pn').val('')});
+  $('#au').on('click',async()=>{if(await run('addUser',{u:val('nu'),p:val('np'),name:val('nn'),role:val('nr')},'เพิ่มผู้ใช้แล้ว'))PAGES.users()})}
+
+,async books(){
+  const ST=(await run('getSettings'))||{};
+  $('#app').html(`<div class="card"><div class="card-body"><h5 class="fw-bold text-success"><i class="bi bi-calculator-fill"></i> งบดุลและตรวจบัญชีประจำเดือน</h5>
+  <div class="row g-2 align-items-end mb-3"><div class="col-6 col-md-2"><label>เดือน</label><input id="by" type="month" class="form-control" value="${today().slice(0,7)}"></div>
+  <div class="col-6 col-md-3"><label>เงินฝากธนาคารจริง (บาท)</label><input id="bk" type="number" class="form-control"></div>
+  <div class="col-6 col-md-3"><label>เงินสดในมือจริง (บาท)</label><input id="ca" type="number" class="form-control" value="0"></div>
+  <div class="col-6 col-md-4 d-flex gap-2"><button class="btn btn-gr flex-fill" id="sv"><i class="bi bi-save"></i> บันทึกยอดจริง</button><button class="btn btn-or flex-fill" id="cl"><i class="bi bi-arrow-repeat"></i> คำนวณ</button></div></div><div id="bo"></div></div></div>`);
+  const draw=async()=>{const b=await run('balance',{ym:val('by')});if(!b)return;window.BK=b;
+    const T=a=>'<table class="table table-sm">'+a.map(r=>`<tr class="${r[2]||''}"><td>${r[0]}</td><td class="text-end">${B(r[1])}</td></tr>`).join('')+'</table>';
+    const ok=Math.abs(b.diff)<1;
+    $('#bo').html(`<div class="row g-3"><div class="col-lg-6"><div class="card border-warning"><div class="card-body"><h6 class="fw-bold text-warning">ยอดเงินที่มีอยู่จริง</h6>${T([['เงินฝากธนาคาร',b.bank],['เงินสดในมือ',b.cash],['เงินที่สมาชิกค้าง (ลูกหนี้ '+b.loanCount+' สัญญา)',b.loans],['รวมมีอยู่จริง',b.actual,'table-warning fw-bold']])}</div></div></div>
+    <div class="col-lg-6"><div class="card border-success"><div class="card-body"><h6 class="fw-bold text-success">ยอดที่ควรมีตามบัญชี</h6>${T([['หุ้นสมาชิก ('+b.members+' คน)',b.memberShares],['ทุนกลุ่ม: ยกมา',b.opening],['+ เงินบำรุงรับสะสม',b.interest],['− ค่าใช้จ่ายกองทุน',-b.expenses],['− สวัสดิการจ่าย',-b.welfare],['ปันผล/เฉลี่ยคืนค้างจ่าย',b.payable],['รวมควรมีตามบัญชี',b.should,'table-success fw-bold']])}</div></div></div></div>
+    <div class="alert ${ok?'alert-success':'alert-danger'} mt-3 d-flex justify-content-between align-items-center"><span><b>ผลต่าง ${B(b.diff)} บาท</b> — ${ok?'ยอดตรงกัน ✔':'ยอดไม่ตรง ตรวจสอบรายการรับ-จ่ายและยอดธนาคาร'}${b.auditYm?` · ยอดจริงอ้างอิงเดือน ${b.auditYm}`:' · ยังไม่ได้บันทึกยอดธนาคาร/เงินสด'}</span>
+    <span class="d-flex gap-2"><button class="btn btn-sm btn-gr" id="pa">พิมพ์บันทึกตรวจบัญชี</button><button class="btn btn-sm btn-or" id="pb">พิมพ์งบดุล</button></span></div>`);
+    $('#pa').on('click',()=>out('บันทึกตรวจบัญชี '+b.ym,auditDoc(b,ST),'ตรวจบัญชี'));$('#pb').on('click',()=>out('งบดุล '+b.ym,bsDoc(b,ST),'งบดุล'))};
+  const tb=(a)=>a.map(r=>`<tr><td>${r[0]}</td><td class="n">${B(r[1])}</td></tr>`).join('');
+  window.auditDoc=(b,ST)=>HEAD('บันทึกข้อความ รายงานการตรวจสอบบัญชีประจำเดือน '+b.ym)+`<p>เรียน ประธานคณะกรรมการอำนวยการกองทุนสวัสดิการออมทรัพย์กลุ่มโรงเรียนนาสวรรค์คำนาดี</p><p>ข้าพเจ้าได้ตรวจสอบบัญชีและเอกสารการเงินของกองทุนประจำเดือน ${b.ym} ผลการตรวจสอบเป็นดังนี้</p><b>ยอดเงินที่มีอยู่จริง</b><table>${tb([['เงินฝากธนาคาร',b.bank],['เงินสดในมือ',b.cash],['เงินที่สมาชิกค้าง',b.loans],['รวม',b.actual]])}</table><b>ยอดเงินที่ควรมีตามบัญชี</b><table>${tb([['หุ้นสมาชิก',b.memberShares],['ทุนกลุ่ม (ยกมา '+B(b.opening)+' + เงินบำรุง '+B(b.interest)+' − ค่าใช้จ่าย '+B(b.expenses)+' − สวัสดิการ '+B(b.welfare)+')',b.groupEquity],['ปันผล/เฉลี่ยคืนค้างจ่าย',b.payable],['รวม',b.should]])}</table><p><b>ผลต่าง ${B(b.diff)} บาท ${Math.abs(b.diff)<1?'(ยอดถูกต้องตรงกัน)':'(ยอดไม่ตรง)'}</b></p><p>จึงเรียนมาเพื่อโปรดทราบ</p>`+SIGN([['ผู้ตรวจสอบบัญชี',ST.auditor],['ผู้จัดการ',ST.manager],['ประธานกรรมการ',ST.chair]]);
+  window.bsDoc=(b,ST)=>HEAD('งบดุล รายงานทรัพย์สิน หนี้สิน และทุนคงเหลือ ณ สิ้นเดือน '+b.ym)+`<table><tr><th>ทรัพย์สิน</th><th>บาท</th><th>หนี้สินและทุน</th><th>บาท</th></tr><tr><td>เงินสดในมือ</td><td class="n">${B(b.cash)}</td><td>ปันผล/เฉลี่ยคืนค้างจ่าย</td><td class="n">${B(b.payable)}</td></tr><tr><td>เงินฝากธนาคาร</td><td class="n">${B(b.bank)}</td><td>ทุนเรือนหุ้น (สมาชิก ${b.members} คน)</td><td class="n">${B(b.memberShares)}</td></tr><tr><td>ลูกหนี้/เงินต้นคงเหลือ</td><td class="n">${B(b.loans)}</td><td>ทุนกลุ่ม/กำไรสะสม</td><td class="n">${B(b.groupEquity)}</td></tr><tr class="b"><td>รวมทรัพย์สิน</td><td class="n">${B(b.actual)}</td><td>รวมหนี้สินและทุน</td><td class="n">${B(b.should)}</td></tr></table><p>ผลต่าง ${B(b.diff)} บาท</p>`+SIGN([['ผู้จัดการ',ST.manager],['นายทะเบียนและบัญชี',ST.registrar],['ผู้ตรวจสอบบัญชี',ST.auditor],['ประธานกรรมการ',ST.chair]]);
+  $('#cl').on('click',draw);$('#sv').on('click',async()=>{if(val('bk')==='')return Swal.fire({icon:'warning',title:'กรอกเงินฝากธนาคาร'});
+    if(await run('save',{sheet:'Audit',obj:{id:'',ym:val('by'),bank:+val('bk'),cash:+val('ca')||0,note:'',by:USER.u}},'บันทึกยอดจริงแล้ว'))draw()});draw()},
+
+async expenses(){
+  $('#app').html(`<div class="card"><div class="card-body"><div class="d-flex justify-content-between mb-3 flex-wrap gap-2"><h5 class="fw-bold text-success"><i class="bi bi-receipt"></i> รายการค่าใช้จ่ายกองทุน</h5><div class="d-flex gap-2"><button class="btn btn-gr" id="pr"><i class="bi bi-printer"></i> รายงานค่าใช้จ่าย</button><button class="btn btn-or" id="add"><i class="bi bi-plus-lg"></i> เพิ่มรายการ</button></div></div><div id="sm" class="row g-2 mb-3"></div><div id="tb"></div></div></div>`);
+  let D=[];const draw=async()=>{D=(await run('list','Expenses'))||[];const by={};D.forEach(r=>by[r.cat]=(by[r.cat]||0)+ +r.amount);
+    $('#sm').html(EXCAT.map(c=>`<div class="col-6 col-md"><div class="card stat g"><div class="card-body py-2"><div class="small text-muted">${c}</div><b>${B(by[c]||0)}</b></div></div></div>`).join('')+`<div class="col-12 col-md"><div class="card stat"><div class="card-body py-2"><div class="small text-muted">รวมทั้งสิ้น</div><b>${B(D.reduce((a,r)=>a+ +r.amount,0))}</b></div></div></div>`);
+    table('tb',[{title:'วันที่',data:'date'},{title:'หมวด',data:'cat'},{title:'รายการ',data:'item'},{title:'จำนวนเงิน',data:'amount',render:B,className:'text-end'},{title:'หมายเหตุ',data:'note'},{title:'',data:'id',orderable:false,render:i=>`<button class="btn btn-sm btn-outline-warning" data-a="e" data-id="${i}"><i class="bi bi-pencil"></i></button> <button class="btn btn-sm btn-outline-danger" data-a="d" data-id="${i}"><i class="bi bi-trash"></i></button>`}],D,async(a,id)=>{const x=D.find(r=>r.id==id);
+      if(a=='e')form(x);else if(await ask('ลบรายการ '+x.item+'?')){if(await run('remove',{sheet:'Expenses',id},'ลบแล้ว'))draw()}})};
+  const form=(x={})=>modal(x.id?'แก้ไขรายการ':'เพิ่มค่าใช้จ่าย',`<div class="row g-3"><div class="col-md-4"><label>วันที่</label><input id="d" type="date" class="form-control" value="${x.date||today()}"></div>
+   <div class="col-md-8"><label>หมวด</label><select id="c" class="form-select">${EXCAT.map(c=>`<option ${c==x.cat?'selected':''}>${c}</option>`)}</select></div>
+   <div class="col-md-8"><label>รายการ</label><input id="i" class="form-control" value="${x.item||''}"></div><div class="col-md-4"><label>จำนวนเงิน</label><input id="a" type="number" step="0.01" class="form-control" value="${x.amount||''}"></div>
+   <div class="col-12"><label>หมายเหตุ</label><input id="n" class="form-control" value="${x.note||''}"></div></div>`,async()=>{
+    const o={id:x.id||'',date:val('d'),cat:val('c'),item:val('i'),amount:+val('a'),note:val('n')};if(!o.item||!o.amount)return Swal.fire({icon:'warning',title:'กรอกรายการและจำนวนเงิน'});
+    if(await run('save',{sheet:'Expenses',obj:o},'บันทึกแล้ว')){mdl.hide();draw()}});
+  $('#add').on('click',()=>form());
+  $('#pr').on('click',()=>{const by={};D.forEach(r=>by[r.cat]=(by[r.cat]||0)+ +r.amount);
+    out('รายงานค่าใช้จ่ายกองทุน',HEAD('รายละเอียดค่าใช้จ่ายกองทุน')+`<table><tr><th>วันที่</th><th>หมวด</th><th>รายการ</th><th>จำนวนเงิน</th><th>หมายเหตุ</th></tr>${D.map(r=>`<tr><td>${r.date}</td><td>${r.cat}</td><td>${r.item}</td><td class="n">${B(r.amount)}</td><td>${r.note||''}</td></tr>`).join('')}</table><b>สรุปตามหมวด</b><table>${EXCAT.map(c=>`<tr><td>${c}</td><td class="n">${B(by[c]||0)}</td></tr>`).join('')}<tr class="b"><td>รวมทั้งสิ้น</td><td class="n">${B(D.reduce((a,r)=>a+ +r.amount,0))}</td></tr></table>`+SIGN([['ผู้จัดทำ'],['ประธานกรรมการ']]),'ค่าใช้จ่าย')});
+  draw()},
+
+async exits(){
+  await load();
+  $('#app').html(`<div class="card"><div class="card-body"><div class="d-flex justify-content-between mb-3"><h5 class="fw-bold text-success"><i class="bi bi-person-dash-fill"></i> สมาชิกย้าย / ลาออก / เกษียณ / เสียชีวิต</h5><button class="btn btn-or" id="add"><i class="bi bi-plus-lg"></i> ทำรายการ</button></div><div id="tb"></div></div></div>`);
+  let D=[];const draw=async()=>{D=(await run('list','Exits'))||[];table('tb',[{title:'วันที่',data:'date'},{title:'สมาชิก',data:'memberId',render:mname},{title:'เหตุ',data:'reason'},{title:'หุ้น',data:'shares',render:B,className:'text-end'},{title:'ปันผล+เฉลี่ยคืน',data:null,render:r=>B(+r.div+ +r.reb),className:'text-end'},{title:'สวัสดิการ',data:'welfare',render:B,className:'text-end'},{title:'หนี้',data:'debt',render:B,className:'text-end'},{title:'สุทธิ',data:'net',render:B,className:'text-end fw-bold'},{title:'ทิศทาง',data:'dir'},{title:'',data:'id',orderable:false,render:i=>`<button class="btn btn-sm btn-outline-success" data-a="p" data-id="${i}"><i class="bi bi-printer"></i></button>`}],D,(a,id)=>{const x=D.find(r=>r.id==id);out('สรุปการจ่ายสมาชิกพ้นสภาพ',exDoc(x),'ย้ายลาออก')})};
+  const exDoc=x=>HEAD('สรุปการจ่ายเงินสมาชิกย้าย/ลาออก/เกษียณ')+`<p>สมาชิก <b>${mname(x.memberId)}</b> เลขที่ ${x.memberId} เหตุ: ${x.reason} วันที่ ${x.date}</p><table><tr><th>รายการ</th><th>บาท</th></tr>${[['ค่าหุ้นสะสม',x.shares],['ปันผล',x.div],['เฉลี่ยคืน',x.reb],['สวัสดิการ',x.welfare],['หัก หนี้เงินกู้คงค้าง',-x.debt]].map(r=>`<tr><td>${r[0]}</td><td class="n">${B(r[1])}</td></tr>`).join('')}<tr class="b"><td>คงเหลือสุทธิ (${x.dir})</td><td class="n">${B(x.net)}</td></tr></table>`+SIGN([['ผู้รับเงิน'],['เจ้าหน้าที่การเงิน'],['ประธานกรรมการ']]);
+  $('#add').on('click',()=>modal('ทำรายการสมาชิกพ้นสภาพ',`<div class="row g-3"><div class="col-md-6"><label>สมาชิก</label><select id="m" class="form-select">${mopts('',x=>x.status=='ใช้งาน')}</select></div>
+   <div class="col-md-3"><label>เหตุ</label><select id="r" class="form-select">${EXITR.map(x=>`<option>${x}</option>`)}</select></div><div class="col-md-3"><label>วันที่</label><input id="d" type="date" class="form-control" value="${today()}"></div>
+   <div class="col-md-6"><label>เงินปันผลที่ได้รับ (บาท)</label><input id="dv" type="number" step="0.01" class="form-control" value="0"></div><div class="col-md-6"><label>เฉลี่ยคืนที่ได้รับ (บาท)</label><input id="rb" type="number" step="0.01" class="form-control" value="0"></div>
+   <div class="col-12"><button class="btn btn-gr btn-sm" id="cx"><i class="bi bi-calculator"></i> คำนวณ</button><div id="pv" class="mt-2"></div></div></div>`,async()=>{
+    if(!val('m'))return Swal.fire({icon:'warning',title:'เลือกสมาชิก'});if(!await ask('ยืนยันให้สมาชิกพ้นสภาพ และหักล้างหนี้ตามที่คำนวณ?'))return;
+    const r=await run('settleExit',pl(true),'บันทึกแล้ว');if(r){mdl.hide();await load();draw()}},'ยืนยันและบันทึก'));
+  const pl=c=>({memberId:val('m'),reason:val('r'),date:val('d'),div:val('dv'),reb:val('rb'),confirm:c});
+  $('#mb').on('click','#cx',async()=>{const r=await run('settleExit',pl(false));if(!r)return;
+    $('#pv').html(`<table class="table table-sm"><tr><td>ค่าหุ้นสะสม</td><td class="text-end">${B(r.shares)}</td></tr><tr><td>ปันผล + เฉลี่ยคืน</td><td class="text-end">${B(r.div+r.reb)}</td></tr><tr><td>สวัสดิการ ${r.eligible?'':'(ไม่ถึงเกณฑ์ 1 ปี/หุ้น 1,000)'}</td><td class="text-end">${B(r.welfare)}</td></tr><tr><td>หัก หนี้คงค้าง (${r.loansClosed} สัญญา)</td><td class="text-end text-danger">−${B(r.debt)}</td></tr><tr class="table-warning fw-bold"><td>สุทธิ: ${r.dir}</td><td class="text-end">${B(Math.abs(r.net))}</td></tr></table>${r.guarantees.length?`<div class="alert alert-warning small">สมาชิกนี้ค้ำประกันอยู่ ${r.guarantees.length} สัญญา (ผู้กู้: ${r.guarantees.map(g=>g.borrower).join(', ')}) ต้องจัดหาผู้ค้ำคนใหม่ภายใน 30 วัน — ใช้แบบ ง-2</div>`:''}`)});
+  draw()},
+
+async settings(){
+  const S=(await run('getSettings'))||{},F=[['groupOpening','ทุนกลุ่ม/หุ้นพัฒนากลุ่ม ยกมาต้นงวด (บาท)','number'],['payable','ปันผล/เฉลี่ยคืนค้างจ่าย (บาท)','number'],['chair','ประธานกรรมการ'],['manager','ผู้จัดการ'],['registrar','นายทะเบียนและบัญชี'],['auditor','ผู้ตรวจสอบบัญชี']];
+  $('#app').html(`<div class="card"><div class="card-body"><h5 class="fw-bold text-success"><i class="bi bi-gear-fill"></i> ตั้งค่ากองทุน</h5><div class="row g-3">${F.map(f=>`<div class="col-md-6"><label>${f[1]}</label><input id="s_${f[0]}" type="${f[2]||'text'}" class="form-control" value="${S[f[0]]||''}"></div>`).join('')}</div><button class="btn btn-or mt-3" id="ss"><i class="bi bi-save"></i> บันทึก</button></div></div>`);
+  $('#ss').on('click',async()=>{const o={};F.forEach(f=>o[f[0]]=val('s_'+f[0]));await run('setSettings',o,'บันทึกแล้ว')})}
+
+,async sync(){
+  await load();const last=await kvGet('last'),pre=await kvGet('pre'),F=t=>t?new Date(t).toLocaleString('th-TH'):'ยังไม่เคย',on=navigator.onLine;
+  const lab=o=>({save:'บันทึก '+(o.p.sheet||''),remove:'ลบ '+(o.p.sheet||''),createLoan:'สัญญากู้',welfare:'สวัสดิการ'})[o.a]+' · '+(o.a=='save'?(o.p.obj.name||o.p.obj.item||o.p.obj.type||o.p.obj.cat||''):o.a=='createLoan'?mname(o.p.memberId)+' '+B(o.p.amount):o.a=='welfare'?mname(o.p.memberId)+' '+o.p.type:o.p.id);
+  const T=(a,f)=>a.length?`<table class="table table-sm"><thead><tr><th>เวลา</th><th>รายการ</th>${f?'<th>สาเหตุ</th><th></th>':''}</tr></thead><tbody>${a.map((o,i)=>`<tr><td>${new Date(o.ts).toLocaleString('th-TH')}</td><td>${lab(o)}</td>${f?`<td class="text-danger small">${o.error}</td><td><button class="btn btn-sm btn-outline-success" data-r="${i}">ลองใหม่</button> <button class="btn btn-sm btn-outline-danger" data-d="${i}">ลบ</button></td>`:''}</tr>`).join('')}</tbody></table>`:'<div class="text-muted">ไม่มีรายการ</div>';
+  $('#app').html(`<div class="row g-3 mb-3"><div class="col-6 col-lg-3"><div class="card stat ${on?'g':''}"><div class="card-body py-3"><div class="small text-muted">สถานะ</div><div class="v">${on?'ออนไลน์':'ออฟไลน์'}</div></div></div></div>
+   <div class="col-6 col-lg-3"><div class="card stat"><div class="card-body py-3"><div class="small text-muted">รอซิงก์</div><div class="v">${Q.length}</div></div></div></div>
+   <div class="col-6 col-lg-3"><div class="card stat g"><div class="card-body py-3"><div class="small text-muted">ซิงก์ล่าสุด</div><div class="fw-bold">${F(last)}</div></div></div></div>
+   <div class="col-6 col-lg-3"><div class="card stat g"><div class="card-body py-3"><div class="small text-muted">ดึงข้อมูลลงเครื่องล่าสุด</div><div class="fw-bold">${F(pre)}</div></div></div></div></div>
+   <div class="card mb-3"><div class="card-body"><h5 class="text-success"><i class="bi bi-arrow-repeat"></i> ซิงก์ข้อมูล</h5><div class="d-flex flex-wrap gap-2">
+    <button class="btn btn-or" id="sn"><i class="bi bi-cloud-upload"></i> อัปโหลดตอนนี้</button><button class="btn btn-gr" id="pf"><i class="bi bi-cloud-download"></i> ดึงข้อมูลล่าสุดไว้ใช้ออฟไลน์</button>
+    <button class="btn btn-outline-secondary" id="ex"><i class="bi bi-download"></i> ส่งออกสำรอง (JSON)</button>${isGAS()?'':'<button class="btn btn-outline-secondary" id="ap"><i class="bi bi-link-45deg"></i> ตั้งค่า URL เซิร์ฟเวอร์</button>'}</div>
+    <p class="small text-muted mt-3 mb-0">ออฟไลน์บันทึกได้: สมาชิก เงินกู้ สวัสดิการ ค่าใช้จ่าย ยอดตรวจบัญชี · ต้องออนไลน์: ปิดยอดเดือน นำเข้าไฟล์ สร้างเอกสารลง Drive ย้าย/ลาออก ปันผล · เงื่อนไขเงินกู้จะตรวจจริงตอนซิงก์</p></div></div>
+   <div class="card mb-3"><div class="card-body"><h6 class="text-warning">รอซิงก์ (${Q.length})</h6>${T(Q,false)}</div></div>
+   <div class="card"><div class="card-body"><h6 class="text-danger">ซิงก์ไม่สำเร็จ (${FAILED.length})</h6>${T(FAILED,true)}</div></div>`);
+  $('#sn').on('click',async()=>{if(!navigator.onLine)return Swal.fire({icon:'info',title:'ยังออฟไลน์อยู่'});Swal.showLoading();await syncNow();Swal.close();PAGES.sync()});
+  $('#pf').on('click',async()=>{if(!navigator.onLine)return Swal.fire({icon:'info',title:'ยังออฟไลน์อยู่'});if(Q.length)await flush();Swal.showLoading();await prefetch();Swal.close();toast('ดึงข้อมูลลงเครื่องแล้ว');PAGES.sync()});
+  $('#ap').on('click',async()=>{await askApi();PAGES.sync()});
+  $('#ex').on('click',()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({queue:Q,failed:FAILED},null,1)],{type:'application/json'}));a.download='sync-backup-'+Date.now()+'.json';a.click()});
+  $('#app').on('click','[data-r]',async function(){const o=FAILED.splice(+$(this).data('r'),1)[0];delete o.error;o.id=uid();Q.push(o);await kvSet('q',Q);await kvSet('f',FAILED);badge();await syncNow();PAGES.sync()});
+  $('#app').on('click','[data-d]',async function(){FAILED.splice(+$(this).data('d'),1);await kvSet('f',FAILED);badge();PAGES.sync()})}
+};
+async function ask(t){return(await Swal.fire({title:t,icon:'question',showCancelButton:true,confirmButtonText:'ยืนยัน',cancelButtonText:'ยกเลิก',confirmButtonColor:'#2E7D32'})).isConfirmed}
+function go(k){location.hash=k}
+function loginView(){
+  document.body.classList.add('login');$('#menu').html('');
+  const S=[['piggy-bank-fill','บริหารกองทุนอย่างโปร่งใส','ทะเบียนสมาชิก ทุนเรือนหุ้น และเงินกู้ ครบในที่เดียว'],['calculator-fill','คำนวณอัตโนมัติตามข้อบังคับ','เงินบำรุง 0.2% ปันผล เฉลี่ยคืน งบดุล และตรวจบัญชี'],['file-earmark-text-fill','แบบฟอร์ม 28 ฉบับ พิมพ์ได้ทันที','เติมข้อมูลอัตโนมัติ บันทึก PDF ลง Google Drive'],['shield-lock-fill','ปลอดภัย แยกสิทธิ์ผู้ใช้','ผู้ดูแล เจ้าหน้าที่ และผู้ชม ตรวจสิทธิ์ทุกการทำงาน']];
+  $('#app').html(`<div class="lg"><div class="lg-s"><div class="lg-b"><i class="bi bi-piggy-bank-fill"></i> นาสวรรค์คำนาดี</div>
+   <div class="lg-t" id="lt">${S.map(s=>`<div class="sl"><div class="ic"><i class="bi bi-${s[0]}"></i></div><h2>${s[1]}</h2><p>${s[2]}</p></div>`).join('')}</div>
+   <button class="arr l" id="pv" type="button"><i class="bi bi-chevron-left"></i></button><button class="arr r" id="nx" type="button"><i class="bi bi-chevron-right"></i></button>
+   <div class="dots" id="ds">${S.map((_,i)=>`<b data-i="${i}"></b>`).join('')}</div></div>
+   <div class="lg-f"><div class="box"><div class="lgo"><i class="bi bi-box-arrow-in-right"></i></div><h1>เข้าสู่ระบบ</h1><div class="sub">กองทุนสวัสดิการออมทรัพย์ กลุ่มโรงเรียนนาสวรรค์คำนาดี</div>
+   <form id="lf" autocomplete="on" novalidate>
+    <label for="lu">ชื่อผู้ใช้</label><div class="ig"><i class="bi bi-person-fill"></i><input id="lu" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="กรอกชื่อผู้ใช้"></div>
+    <label for="lp">รหัสผ่าน</label><div class="ig"><i class="bi bi-lock-fill"></i><input id="lp" name="password" type="password" autocomplete="current-password" placeholder="กรอกรหัสผ่าน"><button type="button" class="eye" id="ey" tabindex="-1"><i class="bi bi-eye-fill"></i></button></div>
+    <button type="submit" class="go" id="lg">เข้าสู่ระบบ</button></form>
+   <div class="hint">หากลืมรหัสผ่าน โปรดติดต่อผู้ดูแลระบบ</div></div></div></div>`);
+  let k=0;const n=S.length,show=i=>{k=(i+n)%n;$('#lt').css('transform',`translateX(-${k*100}%)`);$('#ds b').removeClass('on').eq(k).addClass('on')};
+  const auto=()=>{clearInterval(window.SLT);window.SLT=setInterval(()=>show(k+1),4500)};
+  $('#pv').on('click',()=>{show(k-1);auto()});$('#nx').on('click',()=>{show(k+1);auto()});$('#ds').on('click','b',function(){show(+$(this).data('i'));auto()});show(0);auto();
+  $('#ey').on('click',()=>{const p=$('#lp'),t=p.attr('type')=='password';p.attr('type',t?'text':'password');$('#ey i').attr('class','bi bi-eye'+(t?'-slash':'')+'-fill');p.trigger('focus')});
+  $('#lf').on('submit',async e=>{e.preventDefault();const u=$('#lu').val().trim(),p=$('#lp').val();if(!u||!p)return Swal.fire({icon:'warning',title:'กรอกชื่อผู้ใช้และรหัสผ่าน',confirmButtonColor:'#F57C00'}).then(()=>$(u?'#lp':'#lu').trigger('focus'));
+    $('#lg').prop('disabled',true).html('<span class="spinner-border spinner-border-sm"></span> กำลังเข้าสู่ระบบ...');
+    const r=await call('login',{u,p});$('#lg').prop('disabled',false).text('เข้าสู่ระบบ');
+    if(!r.ok)return Swal.fire({icon:'error',title:'เข้าสู่ระบบไม่สำเร็จ',text:r.error,confirmButtonColor:'#F57C00'}).then(()=>$('#lp').val('').trigger('focus'));
+    TOKEN=r.data.token;USER=r.data.user;SS.set('t',TOKEN);SS.set('u',JSON.stringify(USER));route();syncNow().then(prefetch)});
+  setTimeout(()=>$('#lu').trigger('focus'),300)}
+function route(){clearInterval(window.SLT);if(!TOKEN||!USER)return loginView();document.body.classList.remove('login');const k=(location.hash||'#home').slice(1);if(dt){dt.destroy();dt=null}
+  $('#menu').html(MENU.filter(m=>m[3]!='admin'||USER.role=='admin').map(m=>`<li class="nav-item"><a class="nav-link ${m[0]==k?'active':''}" href="#${m[0]}"><i class="bi bi-${m[1]}"></i> ${m[2]}</a></li>`).join('')+`<li class="nav-item"><a class="nav-link" href="#" onclick="logout()"><i class="bi bi-box-arrow-right"></i> ${USER.name}</a></li>`);
+  $('#usr').text(USER.name+' · '+({admin:'ผู้ดูแล',staff:'เจ้าหน้าที่',viewer:'ผู้ชม'})[USER.role]);(PAGES[k]||PAGES.home)()}
+window.addEventListener('hashchange',route);
+async function boot(){Q=(await kvGet('q'))||[];FAILED=(await kvGet('f'))||[];if(!isGAS()&&!API())await askApi();route();badge();if(TOKEN&&navigator.onLine){await syncNow();prefetch()}}
+window.addEventListener('online',async()=>{badge();if(TOKEN){await syncNow();prefetch()}});window.addEventListener('offline',badge);
+setInterval(()=>{if(TOKEN&&Q.length&&navigator.onLine)flush()},60000);
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)&&!isGAS())navigator.serviceWorker.register('sw.js').catch(()=>{});
+boot();
+</script></body></html>
